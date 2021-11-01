@@ -1,4 +1,4 @@
-module betprophet
+module kakalos12
 
 go 1.17
 
