@@ -1,4 +1,4 @@
-module kakalos12
+module github.com/kakalos12/krakend-error-message
 
 go 1.17
 
