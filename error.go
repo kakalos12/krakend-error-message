@@ -1,4 +1,4 @@
-package krakend_error
+package main
 
 import (
 	"bytes"
@@ -74,6 +74,7 @@ func modifierFromJSON(b []byte) (*parse.Result, error) {
 	msg := &BetProphetErrorModifierJSON{}
 
 	if err := json.Unmarshal(b, msg); err != nil {
+		println("Error ", err)
 		return nil, err
 	}
 
