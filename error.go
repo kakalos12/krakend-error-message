@@ -16,11 +16,13 @@ func init() {
 
 // MarvelModifier contains the private and public Marvel API key
 type BetProphetErrorModifier struct {
+	StatusCode int
 }
 
 // MarvelModifierJSON to Unmarshal the JSON configuration
 type BetProphetErrorModifierJSON struct {
-	Scope []parse.ModifierType `json:"scope"`
+	StatusCode int                  `json:"status_code"`
+	Scope      []parse.ModifierType `json:"scope"`
 }
 
 type BetProphetErrorResponse struct {
@@ -36,6 +38,10 @@ func (m *BetProphetErrorModifier) ModifyResponse(res *http.Response) error {
 		body, error := ioutil.ReadAll(res.Body)
 		if error != nil {
 			body = []byte{}
+		}
+
+		if m.StatusCode != 0 {
+			res.StatusCode = m.StatusCode
 		}
 
 		res.Body.Close()
