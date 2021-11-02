@@ -68,8 +68,8 @@ func (m *BetProphetErrorModifier) ModifyResponse(res *http.Response) error {
 // MarvelNewModifier returns a request modifier that will set the query string
 // at key with the given value. If the query string key already exists all
 // values will be overwritten.
-func BetProphetNewErrorModifier() martian.ResponseModifier {
-	return &BetProphetErrorModifier{}
+func BetProphetNewErrorModifier(StatusCode int) martian.ResponseModifier {
+	return &BetProphetErrorModifier{StatusCode}
 }
 
 func modifierFromJSON(b []byte) (*parse.Result, error) {
@@ -80,5 +80,5 @@ func modifierFromJSON(b []byte) (*parse.Result, error) {
 		return nil, err
 	}
 	fmt.Println("message : ", msg)
-	return parse.NewResult(BetProphetNewErrorModifier(), msg.Scope)
+	return parse.NewResult(BetProphetNewErrorModifier(msg.StatusCode), msg.Scope)
 }
