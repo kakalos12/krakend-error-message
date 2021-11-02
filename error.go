@@ -34,6 +34,8 @@ type BetProphetErrorResponse struct {
 // ModifyRequest modifies the query string of the request with the given key and value.
 func (m *BetProphetErrorModifier) ModifyResponse(res *http.Response) error {
 
+	fmt.Println("Response Status code", res.StatusCode)
+
 	if res.StatusCode >= 400 {
 		// close the body first
 		body, error := ioutil.ReadAll(res.Body)
