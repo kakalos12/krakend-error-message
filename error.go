@@ -35,7 +35,7 @@ type BetProphetErrorResponse struct {
 func (m *BetProphetErrorModifier) ModifyResponse(res *http.Response) error {
 
 	fmt.Println("Response Status code", res.StatusCode)
-
+	fmt.Println("Modifier status ", m.StatusCode)
 	if res.StatusCode >= 400 {
 		// close the body first
 		body, error := ioutil.ReadAll(res.Body)
