@@ -3,6 +3,7 @@ package krakend_error
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 
@@ -37,10 +38,12 @@ func (m *BetProphetErrorModifier) ModifyResponse(res *http.Response) error {
 		// close the body first
 		body, error := ioutil.ReadAll(res.Body)
 		if error != nil {
+			fmt.Println("Error reading response body")
 			body = []byte{}
 		}
 
 		if m.StatusCode != 0 {
+			fmt.Println("Setting status to ", m.StatusCode)
 			res.StatusCode = m.StatusCode
 		}
 
@@ -52,6 +55,8 @@ func (m *BetProphetErrorModifier) ModifyResponse(res *http.Response) error {
 		}
 
 		r, _ := json.Marshal(response_obj)
+
+		fmt.Println("Response ", string(r))
 
 		res.Body = ioutil.NopCloser(bytes.NewReader(r))
 	}
