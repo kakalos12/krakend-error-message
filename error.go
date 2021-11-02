@@ -74,9 +74,9 @@ func modifierFromJSON(b []byte) (*parse.Result, error) {
 	msg := &BetProphetErrorModifierJSON{}
 
 	if err := json.Unmarshal(b, msg); err != nil {
-		println("Error ", err)
+		fmt.Println("Error ", err)
 		return nil, err
 	}
-
+	fmt.Println("message : ", msg)
 	return parse.NewResult(BetProphetNewErrorModifier(), msg.Scope)
 }
