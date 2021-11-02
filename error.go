@@ -12,7 +12,7 @@ import (
 )
 
 func init() {
-	parse.Register("body.BetProphetModifier", modifierFromJSON)
+	parse.Register("body.Modifier", modifierFromJSON)
 }
 
 // MarvelModifier contains the private and public Marvel API key
